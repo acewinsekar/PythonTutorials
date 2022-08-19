@@ -25,10 +25,14 @@
 # and donuts(23) returns 'Number of donuts: many'
 def donuts(count):
   # +++your code here+++
-  if count <10:
-      return 'Number of donuts: ' + str(count)
+  # LAB(begin solution)
+  if count < 10:
+    return 'Number of donuts: ' + str(count)
   else:
-      return 'Number of donuts: many'
+    return 'Number of donuts: many'
+  # LAB(replace solution)
+  # return
+  # LAB(end solution)
 
 
 # B. both_ends
@@ -37,13 +41,16 @@ def donuts(count):
 # so 'spring' yields 'spng'. However, if the string length
 # is less than 2, return instead the empty string.
 def both_ends(s):
-  # +++my code below+++
+  # +++your code here+++
+  # LAB(begin solution)
   if len(s) < 2:
-      return ""
-  else:
-      f2 = s[:2]  # prints from 0th index to2nd index, 2nd not included
-      l2 = s[-2:] #prints from -2 index (starting from -1 which is the last letter
-  return f2 + l2  #concatenate and return
+    return ''
+  first2 = s[0:2]
+  last2 = s[-2:]
+  return first2 + last2
+  # LAB(replace solution)
+  # return
+  # LAB(end solution)
 
 
 # C. fix_start
@@ -56,14 +63,18 @@ def both_ends(s):
 # Hint: s.replace(stra, strb) returns a version of string s
 # where all instances of stra have been replaced by strb.
 def fix_start(s):
-  # +++my code here+++
-  first_letter = s[0]
-  s_wo_first_letter = s[1:]
-  s_replaced = s_wo_first_letter.replace(first_letter,'*')
-  return first_letter + s_replaced
+  # +++your code here+++
+  # LAB(begin solution)
+  front = s[0]
+  back = s[1:]
+  fixed_back = back.replace(front, '*')
+  return front + fixed_back
+  # LAB(replace solution)
+  # return
+  # LAB(end solution)
 
 
-### D. MixUp
+# D. MixUp
 # Given strings a and b, return a single string with a and b separated
 # by a space '<a> <b>', except swap the first 2 chars of each string.
 # e.g.
@@ -72,7 +83,13 @@ def fix_start(s):
 # Assume a and b are length 2 or more.
 def mix_up(a, b):
   # +++your code here+++
-  return
+  # LAB(begin solution)
+  a_swapped = b[:2] + a[2:]
+  b_swapped = a[:2] + b[2:]
+  return a_swapped + ' ' + b_swapped
+  # LAB(replace solution)
+  # return
+  # LAB(end solution)
 
 
 # Provided simple test() function used in main() to print
@@ -82,37 +99,36 @@ def test(got, expected):
     prefix = ' OK '
   else:
     prefix = '  X '
-  print ('%s got: %s expected: %s' % (prefix, repr(got), repr(expected)))
+  print '%s got: %s expected: %s' % (prefix, repr(got), repr(expected))
 
 
 # Provided main() calls the above functions with interesting inputs,
 # using test() to check if each result is correct or not.
 def main():
-  print ('donuts')
+  print 'donuts'
   # Each line calls donuts, compares its result to the expected for that call.
   test(donuts(4), 'Number of donuts: 4')
   test(donuts(9), 'Number of donuts: 9')
   test(donuts(10), 'Number of donuts: many')
   test(donuts(99), 'Number of donuts: many')
 
-
   print
-  print ('both_ends')
+  print 'both_ends'
   test(both_ends('spring'), 'spng')
   test(both_ends('Hello'), 'Helo')
   test(both_ends('a'), '')
   test(both_ends('xyz'), 'xyyz')
 
-
+  
   print
-  print ('fix_start')
+  print 'fix_start'
   test(fix_start('babble'), 'ba**le')
   test(fix_start('aardvark'), 'a*rdv*rk')
   test(fix_start('google'), 'goo*le')
   test(fix_start('donut'), 'donut')
 
   print
-  print ('mix_up')
+  print 'mix_up'
   test(mix_up('mix', 'pod'), 'pox mid')
   test(mix_up('dog', 'dinner'), 'dig donner')
   test(mix_up('gnash', 'sport'), 'spash gnort')

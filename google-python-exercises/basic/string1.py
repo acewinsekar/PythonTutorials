@@ -71,9 +71,23 @@ def fix_start(s):
 #   'dog', 'dinner' -> 'dig donner'
 # Assume a and b are length 2 or more.
 def mix_up(a, b):
-  # +++your code here+++
-  return
+# pithiest way
+    return a.replace(a[:2], b[:2]) + " " + b.replace(b[:2], a[:2])
 
+  # +++your code here+++ (inelegant brute force way of doing it)
+#  a2_0 = a[0]
+ # a2_1 = a[1]
+#  b2_0 = b[0]
+#  b2_1 = b[1]
+ # return b2_0 + b2_1 + a[2:] + " " + a2_0 + a2_1 + b[2:]
+
+  #### using string methods to do the same
+  #a2 = a[:2]
+  #b2 = b[:2]
+#  a_mod = a.replace(a[:2], b[:2])
+#  b_mod = b.replace(b[:2], a[:2])
+#  return a_mod + " " + b_mod
+#'''
 
 # Provided simple test() function used in main() to print
 # what each function returns vs. what it's supposed to return.

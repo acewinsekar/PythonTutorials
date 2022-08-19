@@ -71,9 +71,13 @@ def fix_start(s):
 #   'dog', 'dinner' -> 'dig donner'
 # Assume a and b are length 2 or more.
 def mix_up(a, b):
-# pithiest way
+# pithiest way, but will fail for repeating pattern further in the string
     return a.replace(a[:2], b[:2]) + " " + b.replace(b[:2], a[:2])
 
+# cleanest way to do it
+    new_a = a[:2] + b[2:]
+    new_b = b[:2] + a[2:]
+    return new_a + " " + new_b
   # +++your code here+++ (inelegant brute force way of doing it)
 #  a2_0 = a[0]
  # a2_1 = a[1]
@@ -81,7 +85,8 @@ def mix_up(a, b):
 #  b2_1 = b[1]
  # return b2_0 + b2_1 + a[2:] + " " + a2_0 + a2_1 + b[2:]
 
-  #### using string methods to do the same
+  #### using string methods to do the same (risk of other repeating
+  # patterns getting replaced as well)
   #a2 = a[:2]
   #b2 = b[:2]
 #  a_mod = a.replace(a[:2], b[:2])

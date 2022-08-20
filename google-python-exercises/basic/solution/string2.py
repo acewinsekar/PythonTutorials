@@ -64,7 +64,7 @@ def front_back(a, b):
   if len(a) % 2 == 1:  # add 1 if length is odd
     a_middle = a_middle + 1
   if len(b) % 2 == 1:
-    b_middle = b_middle + 1 
+    b_middle = b_middle + 1
   return a[:a_middle] + b[:b_middle] + a[a_middle:] + b[b_middle:]
   # LAB(replace solution)
   # return

@@ -34,6 +34,25 @@ def verbing(s):
 # This dinner is good!
 def not_bad(s):
   # +++your code here+++
+  '''
+  if ((s.find('not')  or s.find('bad')) == -1) :
+      return s
+  elif s.find('not') = s.find('bad') :
+      return s
+  else :
+      return s[:s.find('not')] + 'good' + s[s.find('bad')+3:]
+  '''
+      ##### alternate code easier to read + uses positive affirmation
+
+  n = s.find('not')
+  b = s.find('bad')
+  if n != -1 and b!= -1 and n < b :
+      return s[:n] + 'good' + s[b+3:]
+  else :
+      return s
+
+#      find_not = s.find('not')
+#      find_bad = s.find('bad')
   return
 
 
@@ -44,10 +63,39 @@ def not_bad(s):
 # e.g. 'abcde', the front half is 'abc', the back half 'de'.
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
+#1 2 3 4 5 6 7
+#0 1 2 3 4 5 6
 def front_back(a, b):
-  # +++your code here+++
-  return
-
+  # +++your code here++
+  # Figure out the middle position of each string.
+  a_mid = len(a)/2
+  b_mid = len(b)/2
+  if len(a) % 2 == 1: # if odd, add 1 to a_mid
+      a_mid += 1
+  if len(b) % 2 == 1: # if odd, add 1 to b_middle
+    b_mid += 1
+  a_mid = int(a_mid)
+  b_mid = int(b_mid)
+#  a-front + b-front + a-back + b-back
+  return a[:a_mid] + b[:b_mid] + a[a_mid:] + b[b_mid:]
+'''
+   # first version
+  la = int(len(a))
+  lb = int(len(b))
+  if la % 2 == 0 :
+      a_front = a[:int(la/2)]
+      a_back = a[int(la/2):]
+  else :
+      a_front = a[:int((la-1)/2+1)]
+      a_back = a[int((la-1)/2+1):]
+  if lb % 2 == 0 :
+      b_front = b[:int(lb/2)]
+      b_back = b[int(lb/2):]
+  else :
+      b_front = b[:int((lb-1)/2+1)]
+      b_back = b[int((lb-1)/2+1):]
+  return a_front + b_front + a_back + b_back
+  '''
 
 # Simple provided test() function used in main() to print
 # what each function returns vs. what it's supposed to return.

@@ -38,9 +38,17 @@ def match_ends(words):
 # before combining them.
 def front_x(words):
   # +++your code here+++
-  
-  return
-
+  s_x = s_no_x = list()
+  for s in words: # create two separate lists of x's and non x's
+      if s[0] == 'x': #alternately could have used the 'startswith' method
+                      # if s.startswith('x'):
+          s_x.append(s)
+      else :
+          s_no_x.append(s)
+  return sorted(s_x) + sorted(s_no_x) #add the two list of strings and return it
+  # other way is to use the sort methods
+  # s_x.sort() #sort the list of strings beginning with x
+  # s_no_x.sort() #sort the remaining list of strings
 
 
 # C. sort_last

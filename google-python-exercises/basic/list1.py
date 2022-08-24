@@ -38,7 +38,12 @@ def match_ends(words):
 # before combining them.
 def front_x(words):
   # +++your code here+++
-  s_x = s_no_x = list()
+  s_x = s_no_x = list() #doing this makes the code go wrong because
+                        #both variables point to the same list in memory
+  s_x = list()
+  s_no_x = list()
+  print (id(s_x), id(s_no_x)) #testing where in memory these lists get created
+  #s_no_x = list()
   for s in words: # create two separate lists of x's and non x's
       if s[0] == 'x': #alternately could have used the 'startswith' method
                       # if s.startswith('x'):
@@ -57,9 +62,13 @@ def front_x(words):
 # e.g. [(1, 7), (1, 3), (3, 4, 5), (2, 2)] yields
 # [(2, 2), (1, 3), (3, 4, 5), (1, 7)]
 # Hint: use a custom key= function to extract the last element form each tuple.
+
+def sorter(a):
+    return a[-1] # return last item from each tuple
 def sort_last(tuples):
-  # +++your code here+++
-  return
+  # my code here+++
+  return sorted(tuples, key=sorter) # key = sorter makes python go looking
+                                  #for a function called sorter, which I def above
 
 
 # Simple provided test() function used in main() to print

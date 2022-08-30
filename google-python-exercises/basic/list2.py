@@ -20,12 +20,10 @@ def remove_adjacent(nums):
   if len(nums) <= 1:
       return nums
   while i < len(nums) :
-#          print (nums, i, nums[i])
           if nums[i-1] == nums[i]:
               nums.pop(i)
               i -= 1 #reduce index by 1 when you pop so you
                      #stay at the same index for next comparison
-#              print(nums, i, nums[i])
           i += 1 #default increment needed
   return nums
 '''
@@ -50,45 +48,31 @@ def remove_adjacent(nums):
 # pass of both lists.
 def linear_merge(list1, list2):
   # +++your code here+++
- merged = list1 + list2
- merged.sort()
- return merged
+#implementation 1 - brute force
+# result = list1 + list2
+# result.sort()
+# return result
 
-'''
-  len1 = len(list1)
-  len2 = len(list2)
-  big_num = 0
-  i = 0
-  # store the greatest number upto a certain index. and since both
-  #lists are sorted, can just append till the big_num is reached
-  merged = [] #empty list to append to
+    result = []
 
-for l1, l2 in zip(list1, list2) :
+# implementation2 - recognizing that they are sorted
+    while len(list1) and len(list2):
+        if list1[0] <= list2[0]:
+            result.append(list1.pop(0)) # pop and append the
+                                    # smaller element
+        else:
+            result.append(list2.pop(0))
 
-  if list1[0] < list2[0] :
-      big_num = list2[0]
-  else :
-      big_num = list1[0]
+#above while loop only exists when one of the list is now size 0
 
-if len1 < len2 :
-    n = len1
-else :
-    n = len2
+#so can tack on what's left
+# and don't care which order
+#as only one list will be non zero length now
+    result.extend(list1)
+    result.extend(list2)
 
-1 2 3 4 5 6
-4 7 8 10
+    return result
 
-  while i <= n:
-      while list1[i] <= big_num and list2[] <= big_num:
-
-
-      if list1[i] <= list2[i]:
-          merged.append(list1[i])
-          merged.append(list2[i])
-      else :
-          merged.append(list2[i])
-          merged.append(list1[i])
-'''
 
 # Note: the solution above is kind of cute, but unforunately list.pop(0)
 # is not constant time with the standard python list implementation, so

@@ -38,6 +38,52 @@ print_words() and print_top().
 """
 
 import sys
+import operator
+def print_words(filename):
+    #learnings: Sorting a dict using sorted returns a list type (with the key value pair inside as tuples)
+    #the print function works below because while I iterate over the sorted list with word (string) as the iterable,
+    #the word_count_dict[word] is actualy calling the dict with the word key
+    word_count_dict = word_count(filename)
+    print(type(sorted(word_count_dict)))
+    print(type(word_count_dict))
+    for word in sorted(word_count_dict.items()): #.items() method returns the key value pair of the dict as a list tuples
+        print(type(word), word, word_count_dict[word])
+        #print (type(word), word[0], word[1]) #to prove the above
+    return 0
+
+def get_count(word_count_tuple):
+    return word_count_tuple[1]
+
+def print_top(filename):
+    word_count_dict = word_count(filename)
+    sorted_dict = sorted(word_count_dict.items(), key=operator.itemgetter(1), reverse = True)
+    print (type(sorted_dict))
+    print(type(word_count_dict))
+    for item in sorted_dict[:13]:
+        print(type(item), item[0], item[1])
+
+    return 0
+
+
+def word_count(filename): #utility function to build a count dict
+
+    word_count = {} # dictionary
+    input_file = open(filename, 'r')
+    for line in input_file: #read the input file line by line
+        words = line.split()  #no splitter called makes it use space by default
+        for word in words:
+            word = word.lower()
+            if not word in word_count:
+                word_count[word] = 1
+            else:
+                word_count[word] = word_count[word] + 1
+
+    input_file.close()  # Not strictly required, but good form.
+    return word_count
+
+
+
+
 
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
@@ -51,7 +97,7 @@ import sys
 # calls the print_words() and print_top() functions which you must define.
 def main():
   if len(sys.argv) != 3:
-    print 'usage: ./wordcount.py {--count | --topcount} file'
+    print ('usage: ./wordcount.py {--count | --topcount} file')
     sys.exit(1)
 
   option = sys.argv[1]
@@ -61,7 +107,7 @@ def main():
   elif option == '--topcount':
     print_top(filename)
   else:
-    print 'unknown option: ' + option
+    print ('unknown option: ' + option)
     sys.exit(1)
 
 if __name__ == '__main__':

@@ -39,6 +39,7 @@ print_words() and print_top().
 
 import sys
 import operator
+
 def print_words(filename):
     #learnings: Sorting a dict using sorted returns a list type (with the key value pair inside as tuples)
     #the print function works below because while I iterate over the sorted list with word (string) as the iterable,
@@ -55,13 +56,26 @@ def get_count(word_count_tuple):
     return word_count_tuple[1]
 
 def print_top(filename):
+    ### both codes below are equivalent - one users item getter method (needs import operator) and the other uses a lambda function
+    #itemgetter(0) will fetch the key and itemgetter(1) fetches the value associated with the key...
+    #both together is a tuple and the sorted dict is a list of tuples
     word_count_dict = word_count(filename)
     sorted_dict = sorted(word_count_dict.items(), key=operator.itemgetter(1), reverse = True)
     print (type(sorted_dict))
     print(type(word_count_dict))
-    for item in sorted_dict[:13]:
+    for item in sorted_dict[:20]:
+        print(type(item), item[0], item[1])
+    # the below is equivalent using the lambda function
+    #which then is used to fetch the value from the tuple of key and value and then sort the list in reverse order
+    word_count_dict = word_count(filename)
+    sorted_dict1 = sorted(word_count_dict.items(), key=lambda fetch_value:fetch_value[1], reverse = True)
+    print (type(sorted_dict1))
+    print(type(word_count_dict))
+    for item in sorted_dict1[:20]:
         print(type(item), item[0], item[1])
 
+    if sorted_dict == sorted_dict1:
+        print ("the methods are equivalent")
     return 0
 
 

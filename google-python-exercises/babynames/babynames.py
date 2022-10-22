@@ -40,21 +40,24 @@ def extract_names(filename):
   followed by the name-rank strings in alphabetical order.
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
-  babynames_file = open(filename, 'r') #reads the baby1990.html into one big string
-
-  #print(type(babynames_file))
-
   babynames = babynames_file.read()
   match_year = re.search(r'Popularity in \d\d\d\d', babynames)
+
+  print(match_year.group())
   year_str = match_year.group()
   year = year_str[-4:]
+  print(type(year))
   print(year)
-  baby_names_rank = re.findall(r'\w+\d+</td><td>\w+</td><td>\w+</td>', babynames)
-  print(baby_names_rank)
+  baby_names_rank = re.findall(r'(\d+)</td><td>(\w+)</td><td>(\w+)</td>', babynames)
+  #creates a tuple of rank, last name and first name for all repetitions of the pattern by
+  #inserting the paranthesis around the groups i want
 
+  print(type(baby_names_rank))
+  print(baby_names_rank)
+  year_name_rank = year + string(baby_names_rank)
+  print(type(year_name_rank))
 
   # +++your code here+++
-  year = re.search()
   return
 
 

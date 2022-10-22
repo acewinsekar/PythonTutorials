@@ -41,10 +41,23 @@ year_str = match_year.group()
 year = year_str[-4:]
 print(type(year))
 print(year)
-baby_names_rank = re.findall(r'(\d+)</td><td>(\w+)</td><td>(\w+)</td>', babynames)
-#creates a tuple of rank, last name and first name for all repetitions of the pattern by
+baby_names_rank = re.findall(r'(\d+)</td><td>\w+</td><td>(\w+)</td>', babynames)
+#creates a list of tuples of rank, last name and first name for all repetitions of the pattern by
 #inserting the paranthesis around the groups i want
 
 #rank_name_tuple = re.search(r'\d*[]', baby_names_rank)
+rank_first_name = []
+rank_first_name.append(year)
+rank_name_dict = {} #dict
+
+for baby in baby_names_rank:
+    rank_first_name.append(baby[0] + " " + baby[1])
+    rank_name_dict[baby[1]] = baby[0]
+
 
 print(baby_names_rank)
+print(type(baby_names_rank))
+print(rank_first_name)
+print(rank_name_dict)
+#year_name_rank = year + (baby_names_rank)
+#print(type(year_name_rank))

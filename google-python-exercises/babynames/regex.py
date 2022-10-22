@@ -55,9 +55,10 @@ for baby in baby_names_rank:
     rank_name_dict[baby[1]] = baby[0]
 
 
-print(baby_names_rank)
-print(type(baby_names_rank))
-print(rank_first_name)
+
+#print(baby_names_rank)
+#print(type(baby_names_rank))
+#print(rank_first_name)
 print(rank_name_dict)
 #year_name_rank = year + (baby_names_rank)
 #print(type(year_name_rank))

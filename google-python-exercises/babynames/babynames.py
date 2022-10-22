@@ -40,7 +40,21 @@ def extract_names(filename):
   followed by the name-rank strings in alphabetical order.
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
+  babynames_file = open(filename, 'r') #reads the baby1990.html into one big string
+
+  #print(type(babynames_file))
+
+  babynames = babynames_file.read()
+  match_year = re.search(r'Popularity in \d\d\d\d', babynames)
+  year_str = match_year.group()
+  year = year_str[-4:]
+  print(year)
+  baby_names_rank = re.findall(r'\w+\d+</td><td>\w+</td><td>\w+</td>', babynames)
+  print(baby_names_rank)
+
+
   # +++your code here+++
+  year = re.search()
   return
 
 
@@ -63,6 +77,6 @@ def main():
   # +++your code here+++
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
-  
+
 if __name__ == '__main__':
   main()

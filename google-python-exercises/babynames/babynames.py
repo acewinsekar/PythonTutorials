@@ -40,25 +40,29 @@ def extract_names(filename):
   followed by the name-rank strings in alphabetical order.
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
-  babynames = babynames_file.read()
+  # +++my code here+++
+  f = open(filename, 'r')
+  babynames = f.read()
+
   match_year = re.search(r'Popularity in \d\d\d\d', babynames)
+  year = match_year.group()[-4:]
+  baby_names_rank = re.findall(r'(\d+)</td><td>\w+</td><td>(\w+)</td>', babynames)
+  #creates a list of tuples of rank, (last name - remove paranthesis to get the last name removed)
+  #and first name for all repetitions of the pattern by inserting the paranthesis around the groups i want
 
-  print(match_year.group())
-  year_str = match_year.group()
-  year = year_str[-4:]
-  print(type(year))
-  print(year)
-  baby_names_rank = re.findall(r'(\d+)</td><td>(\w+)</td><td>(\w+)</td>', babynames)
-  #creates a tuple of rank, last name and first name for all repetitions of the pattern by
-  #inserting the paranthesis around the groups i want
+  rank_first_name = []
+  rank_first_name.append(year)
+  rank_name_dict = {} #dict
 
-  print(type(baby_names_rank))
-  print(baby_names_rank)
-  year_name_rank = year + string(baby_names_rank)
-  print(type(year_name_rank))
+  for baby in baby_names_rank:
+      rank_name_dict[baby[1]] = baby[0] #name is key, rank is value for this dict
 
-  # +++your code here+++
-  return
+  sorted_dict_rank_name = dict(sorted(rank_name_dict.items())) #sort the dict
+
+  for key in sorted_dict_rank_name:
+      rank_first_name.append(key + " " + sorted_dict_rank_name[key])
+
+  return rank_first_name
 
 
 def main():
@@ -68,7 +72,7 @@ def main():
   args = sys.argv[1:]
 
   if not args:
-    print 'usage: [--summaryfile] file [file ...]'
+    print ('usage: [--summaryfile] file [file ...]')
     sys.exit(1)
 
   # Notice the summary flag and remove it from args if it is present.
@@ -76,6 +80,21 @@ def main():
   if args[0] == '--summaryfile':
     summary = True
     del args[0]
+
+
+  summary_baby_names = open(r'./SummaryBabyNames.txt', 'w')
+
+  for babynames_file in args:
+      names = extract_names(babynames_file)
+
+      text = '\n'.join(names) #make a text out of the list
+
+      if summary:
+          outf = open(babynames_file + '.summary', 'w')
+          outf.write(text)
+          outf.close()
+      else:
+          print(text)
 
   # +++your code here+++
   # For each filename, get the names, then either print the text output

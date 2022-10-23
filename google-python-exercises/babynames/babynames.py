@@ -44,23 +44,31 @@ def extract_names(filename):
   f = open(filename, 'r')
   babynames = f.read()
 
-  match_year = re.search(r'Popularity in \d\d\d\d', babynames)
-  year = match_year.group()[-4:]
-  baby_names_rank = re.findall(r'(\d+)</td><td>\w+</td><td>(\w+)</td>', babynames)
-  #creates a list of tuples of rank, (last name - remove paranthesis to get the last name removed)
-  #and first name for all repetitions of the pattern by inserting the paranthesis around the groups i want
+  match_year = re.search(r'Popularity in (\d\d\d\d)', babynames)
+ # year = match_year.group()[-4:]
+  year = match_year.group(1) #alternate way by inserting the paranthesis, I create the group
+  baby_names_rank = re.findall(r'(\d+)</td><td>(\w+)</td><td>(\w+)</td>', babynames)
+  #creates a list of tuples of rank, boy name, girl name
+  #for all repetitions of the pattern by inserting the paranthesis around the groups i want
 
   rank_first_name = []
   rank_first_name.append(year)
   rank_name_dict = {} #dict
 
   for baby in baby_names_rank:
-      rank_name_dict[baby[1]] = baby[0] #name is key, rank is value for this dict
+      (rank, boyname, girlname) = baby #unpack the tuple
+      #Note: I could access it as baby[0], [baby[1]], baby[2] - elements of the tuple
+      if boyname not in rank_name_dict:
+          rank_name_dict[boyname] = rank
+      if girlname not in rank_name_dict:
+          rank_name_dict[girlname] = rank
+    #  rank_name_dict[baby[1]] = baby[0] #name is key, rank is value for this dict (alternate way of doing the above)
 
   sorted_dict_rank_name = dict(sorted(rank_name_dict.items())) #sort the dict
 
-  for key in sorted_dict_rank_name:
-      rank_first_name.append(key + " " + sorted_dict_rank_name[key])
+  for key in sorted_dict_rank_name: #build up the list one by one
+      key_value = key + " " + sorted_dict_rank_name[key]
+      rank_first_name.append(key_value)
 
   return rank_first_name
 

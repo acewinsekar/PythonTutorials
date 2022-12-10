@@ -18,11 +18,12 @@ def wget(url):
   if info.get_content_type() == 'text/html':
     print('base url:' + ufile.geturl())
     text = ufile.read()  ## read all its text
-    print(text)
+    #text2 = text.decode() # to convert to string didn't work and returned a decoding error
+    text2 = str(text) #convert to string
+    print(type(text))
     dm_name = domain_name.group(1)
-    outf = open(dm_name + '.txt', 'w') ## why is this write operation failing
-    # needs to be debugged
-    outf.write(text)
+    outf = open(dm_name + '.txt', 'w')
+    outf.write((text2))
     outf.close()
 
 
